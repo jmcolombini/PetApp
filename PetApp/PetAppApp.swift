@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct PetAppApp: App {
+    @StateObject var viewModel: PetViewModel = PetViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            EnterView()
         }
+        .environmentObject(viewModel)
     }
 }

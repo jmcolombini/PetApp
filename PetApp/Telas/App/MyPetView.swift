@@ -8,12 +8,7 @@
 import SwiftUI
 
 struct MyPetView: View {
-    var pets = [
-        Pet(name: "Mite", imageURL: .lia, isSelected: true),
-        Pet(name: "Lia", imageURL: .lia, isSelected: false),
-        Pet(name: "Fred", imageURL: .lia, isSelected: false),
-        Pet(name: "Flecha", imageURL: .lia, isSelected: false)
-    ]
+    @EnvironmentObject var viewModel: PetViewModel
     @State var selectedPet: Pet
     
     var body: some View {
@@ -27,7 +22,7 @@ struct MyPetView: View {
                     ScrollView {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
-                                ForEach(pets) { pet in
+                                ForEach(viewModel.pets) { pet in
                                     PetCardView(imageName: UIImage(data: pet.imageURL)!, petName: pet.name)
                                 }
                             }
@@ -65,18 +60,20 @@ struct PetCardView: View {
             Image(uiImage: imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 330, height: 450)
-                .clipShape(RoundedRectangle(cornerRadius: 60))
+                .frame(width: 160, height: 170)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
         }
         .overlay {
             VStack {
                 Spacer()
                 HStack {
                     Text(petName)
+                        .font(.system(size: 22))
                     Spacer()
                 }
             }
-            .padding(30)
+            .padding(.vertical, 5)
+            .padding(.horizontal, 9)
             .font(.largeTitle)
             .foregroundStyle(.white)
             .fontWeight(.medium)
@@ -87,5 +84,9 @@ struct PetCardView: View {
 
 #Preview {
     SelectedPetView()
+        .environmentObject(PetViewModel())
 }
 
+#Preview {
+    PetCardView(imageName: .mite, petName: "Mite")
+}

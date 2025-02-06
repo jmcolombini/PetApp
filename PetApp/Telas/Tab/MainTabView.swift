@@ -12,7 +12,7 @@ struct MainTabView: View {
     @Binding var show: Bool
     var body: some View {
         if selectedTab == .pets {
-            SelectedPetView()
+            MyPetsView()
         } else if selectedTab == .ajustes {
             SettingsView()
         }
