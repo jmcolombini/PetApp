@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FirstScreenView: View {
+struct OnBoardingView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -64,7 +64,7 @@ struct FirstScreenView: View {
 }
 
 #Preview {
-    FirstScreenView()
+    OnBoardingView()
         .environmentObject(PetViewModel())
 }
 
