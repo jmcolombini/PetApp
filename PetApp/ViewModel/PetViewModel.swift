@@ -15,4 +15,4 @@ class PetViewModel: ObservableObject {
     }
 }
 
-let allPets: [Pet] = [Pet(name: "Mite", imageURL: .mite, isSelected: true)]
+let allPets: [Pet] = [Pet(name: "Mite", age: 2, imageURL: .mite, isSelected: true)]

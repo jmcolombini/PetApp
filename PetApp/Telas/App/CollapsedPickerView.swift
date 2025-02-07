@@ -9,32 +9,46 @@ import SwiftUI
 
 struct CollapsedPickerView: View {
     let name: String
+    let description: String
     let icon: String
     let color: Color
     var height: Int
     
     var body: some View {
-        HStack(alignment: .top, spacing: 10) {
-            Text(name)
-                .font(.system(size: 32))
-                .padding(15)
-    
+        // Main Hstack
+        HStack {
+            // Vstack da esquerda
+            VStack(alignment: .leading) {
+                //Imagem e título
+                HStack {
+                    Image(systemName: icon)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 24, height: 24)
+                        .foregroundStyle(color)
+                    Text(name)
+                        .foregroundStyle(.black)
+                        .font(.system(size: 20))
+                }
+                
+                Text(description)
+                    .font(.system(size: 17))
+                    .foregroundStyle(Color(red: 0.47, green: 0.47, blue: 0.47))
+            }
+            
             Spacer()
             
-            Image(systemName: icon)
-                .resizable()
-                .frame(width: 30, height: 30)
-                .foregroundStyle(color)
-                .padding(20)
-            
+            Image(systemName: "chevron.right")
+                .foregroundStyle(Color(red: 0.5, green: 0.5, blue: 0.5))
         }
-        .frame(height: CGFloat(height), alignment: .topLeading)
+        .padding(.horizontal, 22)
+        .frame(height: CGFloat(height))
         .background(Color(red: 0.95, green: 0.95, blue: 0.95))
         .cornerRadius(30)
-        .padding(.horizontal, 25)
+        .padding(.horizontal, 30)
     }
 }
 
 #Preview {
-    CollapsedPickerView(name: "Agenda", icon: "calendar.circle.fill", color: Color(red: 0.87, green: 0.38, blue: 0.39), height: 100)
+    CollapsedPickerView(name: "Agenda", description: "Alarmes, remédios e rotina", icon: "calendar.circle.fill", color: Color(red: 1, green: 0.34, blue: 0.34), height: 100)
 }

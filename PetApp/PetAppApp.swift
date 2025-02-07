@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct PetAppApp: App {
     @StateObject var viewModel: PetViewModel = PetViewModel()
     var body: some Scene {
         WindowGroup {
-            EnterView()
+            OnBoardingView()
         }
+        .modelContainer(for: Pet.self)
         .environmentObject(viewModel)
     }
 }

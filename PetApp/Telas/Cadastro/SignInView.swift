@@ -54,7 +54,7 @@ struct SignInView: View {
                             
                             VStack(spacing: 30) {
                                 
-                                TextFieldComponent(title: "Email", textFieldTitle: "", textInput: $textEmail)
+                                TextFieldComponent(title: "Email", textFieldTitle: "", spacing: 8, textInput: $textEmail)
                                 VStack(alignment: .leading) {
                                     
                                     HStack {
@@ -165,9 +165,10 @@ struct SignInView: View {
 struct TextFieldComponent: View {
     let title: String
     let textFieldTitle: String
+    let spacing: Int
     @Binding var textInput: String
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: CGFloat(spacing)) {
             Text(title)
                 .fontWeight(.medium)
                 .padding(.horizontal)

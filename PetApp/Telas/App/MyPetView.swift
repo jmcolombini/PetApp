@@ -23,7 +23,7 @@ struct MyPetView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 20) {
                                 ForEach(viewModel.pets) { pet in
-                                    PetCardView(imageName: UIImage(data: pet.imageURL)!, petName: pet.name)
+                                    PetCardView(imageURL: UIImage(data: pet.imageURL)!, petName: pet.name)
                                 }
                             }
                             .padding(.horizontal, 30)
@@ -52,12 +52,12 @@ struct MyPetView: View {
 }
 
 struct PetCardView: View {
-    var imageName: UIImage
+    var imageURL: UIImage
     var petName: String
     
     var body: some View {
         VStack(spacing: 15) {
-            Image(uiImage: imageName)
+            Image(uiImage: imageURL)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 160, height: 170)
@@ -88,5 +88,5 @@ struct PetCardView: View {
 }
 
 #Preview {
-    PetCardView(imageName: .mite, petName: "Mite")
+    PetCardView(imageURL: .mite, petName: "Mite")
 }

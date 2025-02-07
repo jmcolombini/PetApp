@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MyPetsView: View {
     @EnvironmentObject var viewModel: PetViewModel
     @State var showSheet = false
-    @State private var showAddAnimalView = false
-    @State var selectedPet = 0
-    @State var selectedPicker: Picker = .none
+    @Environment(\.modelContext) var modelContext
+    
+    @Query var pets: [Pet]
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -31,25 +33,56 @@ struct MyPetsView: View {
                     }
                     .sheet(isPresented: $showSheet) {
                         AddPetView()
+                            .presentationDetents([.height(600)])
+                            .presentationDragIndicator(.visible)
+                        
                     }
                 }
                 .padding(16)
                 
-                HStack(spacing: 25) {
-                    NewMyPetView(name: "Lia", age: 4, imageName: "lia")
-                    NewMyPetView(name: "Mite", age: 2, imageName: "mite")
+                if !pets.isEmpty {
+                    HStack(spacing: 25) {
+                        ForEach(pets) { pet in
+                            NavigationLink {
+                                PetDetailView(pet: pet)
+                            } label: {
+                                PetCardView(imageURL: UIImage(data: pet.imageURL)!, petName: pet.name)
+                            }
+                            .contextMenu {
+                                Button(role: .destructive){
+                                    withAnimation {
+                                        modelContext.delete(pet)
+                                    }
+                                } label: {
+                                    Label("Deletar pet", systemImage: "trash")
+                                }
+                            }
+                        }
+                        
+                    }
+                    .frame(minWidth: 350, alignment: .leading)
+                } else {
+                    Spacer().frame(height: 100)
+                    Text("Parece que você não adicionou um pet ainda. Clique no + para adicionar!")
+                        .padding(.horizontal, 30)
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(.gray)
+                        .font(.title)
+                        
                 }
-                .frame(minWidth: 350, alignment: .leading)
-                
                 
                 Spacer()
+                
             }
+            .navigationBarHidden(true)
+            .navigationTitle("Meus bichos")
         }
     }
 }
 
 #Preview {
     MyPetsView()
+        .modelContainer(for: Pet.self, inMemory: true)
         .environmentObject(PetViewModel())
 }
 
@@ -57,28 +90,31 @@ struct MyPetsView: View {
 struct NewMyPetView: View {
     var name: String
     var age: Int
-    var imageName: String
+    var imageURL: UIImage
     var body: some View {
-        VStack {
-            Image(imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 160, height: 170)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-                .overlay(alignment: .bottom) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(name)
-                                .font(.system(size: 16, weight: .semibold))
-                            Text("\(age) anos")
-                                .font(.system(size: 12))
+        ZStack {
+            VStack {
+                Image(uiImage: imageURL)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 160, height: 160)
+                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .overlay(alignment: .bottom) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(name)
+                                    .font(.system(size: 16, weight: .semibold))
+                                Text("\(age) anos")
+                                    .font(.system(size: 12))
+                            }
+                            Spacer()
                         }
-                        Spacer()
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 6)
+                        .background(.white)
                     }
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 6)
-                    .background(.white)
-                }
+            }
+            
         }
         .overlay {
             RoundedRectangle(cornerRadius: 15)

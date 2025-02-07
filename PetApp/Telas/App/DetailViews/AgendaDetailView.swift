@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct AgendaDetailView: View {
+    @State var showSheet = false
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                DetailViewComponent(showSheet: $showSheet, title: "Rotina")
+                    .sheet(isPresented: $showSheet) {
+                        Text("OI")
+                    }
+                Spacer()
+            }
+            .padding(.top)
+        }
     }
 }
 

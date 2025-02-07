@@ -61,26 +61,26 @@ struct SelectedPetView: View {
                     Spacer().frame(height: 40)
                     
                     VStack(spacing: 20) {
-                        CollapsedPickerView(name: "Agenda", icon: "calendar.circle.fill", color: Color(red: 0.87, green: 0.38, blue: 0.39), height: selectedPicker == .agenda ? 300 : 100)
+                        CollapsedPickerView(name: "Agenda", description: "oi", icon: "calendar.circle.fill", color: Color(red: 0.87, green: 0.38, blue: 0.39), height: selectedPicker == .agenda ? 300 : 100)
                             .onTapGesture {
                                 withAnimation {
                                     selectedPicker = .agenda
                                 }
                             }
-                        CollapsedPickerView(name: "Saúde", icon: "heart.circle", color: Color(red: 0.37, green: 0.82, blue: 0.8), height: selectedPicker == .saude ? 300 : 100)
+                        CollapsedPickerView(name: "Saúde", description: "oi", icon: "heart.circle", color: Color(red: 0.37, green: 0.82, blue: 0.8), height: selectedPicker == .saude ? 300 : 100)
                             .onTapGesture {
                                 withAnimation {
                                     selectedPicker = .saude
                                 }
                             }
                         
-                        CollapsedPickerView(name: "Compras", icon: "cart.fill", color: Color(red: 0.17, green: 0.52, blue: 0.82), height: selectedPicker == .compras ? 300 : 100)
+                        CollapsedPickerView(name: "Compras", description: "oi", icon: "cart.fill", color: Color(red: 0.17, green: 0.52, blue: 0.82), height: selectedPicker == .compras ? 300 : 100)
                             .onTapGesture {
                                 withAnimation {
                                     selectedPicker = .compras
                                 }
                             }
-                        CollapsedPickerView(name: "Passeios", icon: "point.bottomleft.forward.to.arrow.triangle.uturn.scurvepath.fill", color: Color(red: 1, green: 0.65, blue: 0.2), height: selectedPicker == .passeios ? 300 : 100)
+                        CollapsedPickerView(name: "Passeios", description: "oi", icon: "point.bottomleft.forward.to.arrow.triangle.uturn.scurvepath.fill", color: Color(red: 1, green: 0.65, blue: 0.2), height: selectedPicker == .passeios ? 300 : 100)
                             .onTapGesture {
                                 withAnimation {
                                     selectedPicker = .passeios
@@ -151,7 +151,7 @@ struct SheetView: View {
                     }
                     
                     Button {
-                        let pet = Pet(name: "Lia", imageURL: .lia, isSelected: false)
+                        let pet = Pet(name: "Lia", age: 4, imageURL: .lia, isSelected: false)
                         pets.append(pet)
                         showSheet = false
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

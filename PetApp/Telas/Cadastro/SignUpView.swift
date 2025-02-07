@@ -46,8 +46,8 @@ struct SignUpview: View {
                             .shadow(color: .black.opacity(0.01), radius: 25.15, x: 0, y: 0)
                         
                         VStack(spacing: 25) {
-                            TextFieldComponent(title: "Insira seu nome", textFieldTitle: "", textInput: $username)
-                            TextFieldComponent(title: "Insira seu email", textFieldTitle: "", textInput: $textEmail)
+                            TextFieldComponent(title: "Insira seu nome", textFieldTitle: "", spacing: 8, textInput: $username)
+                            TextFieldComponent(title: "Insira seu email", textFieldTitle: "", spacing: 8, textInput: $textEmail)
                             
                             VStack(alignment: .leading) {
                                 

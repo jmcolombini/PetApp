@@ -4,7 +4,7 @@
 //
 //  Created by found on 04/02/25.
 //
-
+import SwiftData
 import SwiftUI
 
 struct OnBoardingView: View {
@@ -65,6 +65,7 @@ struct OnBoardingView: View {
 
 #Preview {
     OnBoardingView()
+        .modelContainer(for: Pet.self, inMemory: true)
         .environmentObject(PetViewModel())
 }
 
@@ -127,6 +128,7 @@ struct PickPetView: View {
 
 #Preview {
     PickPetView()
+        .modelContainer(for: Pet.self, inMemory: true)
         .environmentObject(PetViewModel())
 }
 

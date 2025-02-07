@@ -7,15 +7,19 @@
 
 import Foundation
 import PhotosUI
+import SwiftData
 
+@Model
 class Pet: Identifiable {
-    let id = UUID()
-    let name: String
-    let imageURL: Data
+    var id = UUID()
+    var name: String
+    var age: Int
+    var imageURL: Data
     var isSelected: Bool
     
-    init(name: String, imageURL: UIImage, isSelected: Bool) {
+    init(name: String, age: Int, imageURL: UIImage, isSelected: Bool) {
         self.name = name
+        self.age = age
         self.imageURL = imageURL.pngData()!
         self.isSelected = isSelected
     }
