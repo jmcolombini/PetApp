@@ -12,10 +12,15 @@ struct AgendaDetailView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                DetailViewComponent(showSheet: $showSheet, title: "Rotina")
-                    .sheet(isPresented: $showSheet) {
-                        Text("OI")
-                    }
+//                DetailViewComponent(showSheet: $showSheet, title: "Rotina")
+//                    .sheet(isPresented: $showSheet) {
+//                        HomeView()
+//                    }
+                NavigationLink {
+                    HomeView()
+                } label: {
+                    Image(systemName: "plus")
+                }
                 Spacer()
             }
             .padding(.top)

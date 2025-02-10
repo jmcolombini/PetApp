@@ -13,6 +13,8 @@ struct MyPetsView: View {
     @State var showSheet = false
     @Environment(\.modelContext) var modelContext
     
+    let columns: [GridItem] = [GridItem(.flexible()),
+                               GridItem(.flexible())]
     @Query var pets: [Pet]
     
     var body: some View {
@@ -33,7 +35,7 @@ struct MyPetsView: View {
                     }
                     .sheet(isPresented: $showSheet) {
                         AddPetView()
-                            .presentationDetents([.height(600)])
+                            .presentationDetents([.height(450)])
                             .presentationDragIndicator(.visible)
                         
                     }
@@ -41,7 +43,8 @@ struct MyPetsView: View {
                 .padding(16)
                 
                 if !pets.isEmpty {
-                    HStack(spacing: 25) {
+                    
+                    LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(pets) { pet in
                             NavigationLink {
                                 PetDetailView(pet: pet)
@@ -58,9 +61,9 @@ struct MyPetsView: View {
                                 }
                             }
                         }
-                        
                     }
-                    .frame(minWidth: 350, alignment: .leading)
+                    .padding(.horizontal)
+                    
                 } else {
                     Spacer().frame(height: 100)
                     Text("Parece que você não adicionou um pet ainda. Clique no + para adicionar!")
